@@ -1,1 +1,17 @@
-# tax-refund-bot
+# Tax Refund Bot
+
+This tax refund bot demonstrates how Amazon Lex might be used by State and Local government to improve citizen experience. It allows citizens to automatically look up the status of their State tax refund via voice or SMS.
+
+Follow these steps to deploy the demo:
+1. Zip up TaxRefund_Export.json. In the Lex console, go to Actions -> Import and select the zip file.
+2. Create a Python 2.7 Lambda function with the code in lambda_function.py.
+3. Update the Lex bot you deployed in Step #1 to use this Lambda function for validation and fulfillment in the CheckTaxRefundStatus intent. Then Build and Publish the bot.
+4. For this Lambda function, create an IAM role with the following managed policies attached:
+	* AWSLambdaRole
+	* AWSLambdaExecute
+	* AmazonDynamoDBReadOnlyAccess
+
+5. Update the Lambda function so it uses the new role created in step 4.
+6. Create a DynamoDB table called "taxpayers" with SSN (Number) as the partition key. Refer to taxpayers.csv for sample data.
+
+You can now test the tax refund bot from within the Lex console. You could integrate the bot with a Connect flow, Facebook or SMS (via Twilio).
