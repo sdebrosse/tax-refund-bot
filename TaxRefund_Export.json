@@ -1,0 +1,220 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  },
+  "resource": {
+    "name": "TaxRefund",
+    "version": "14",
+    "intents": [
+      {
+        "name": "Help",
+        "version": "6",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "help",
+          "options",
+          "who are you",
+          "what are you",
+          "hi",
+          "hello"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Hi, I'm Tax Refund bot! You can type, 'tax refund' or 'what's my refund status' to start the process of checking on your tax refund."
+            }
+          ]
+        }
+      },
+      {
+        "name": "ThankYou",
+        "version": "4",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "thank you",
+          "thanks",
+          "appreciate it"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "you're welcome!"
+            },
+            {
+              "groupNumber": 1,
+              "contentType": "PlainText",
+              "content": "Of course, no problem!"
+            }
+          ]
+        }
+      },
+      {
+        "rejectionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Okay, let's try again."
+            }
+          ]
+        },
+        "name": "CheckTaxRefundStatus",
+        "version": "42",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "tax refund",
+          "what's my refund status",
+          "refund status",
+          "tax refund status"
+        ],
+        "slots": [
+          {
+            "sampleUtterances": [
+              "I'm expecting {RefundAmount}"
+            ],
+            "slotType": "RefundAmount",
+            "slotTypeVersion": "3",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "How much of a refund are you expecting (rounded to the nearest dollar?)"
+                },
+                {
+                  "contentType": "PlainText",
+                  "content": "What refund are you expecting (rounded to the nearest dollar?)"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[]}",
+              "maxAttempts": 2
+            },
+            "priority": 3,
+            "name": "RefundAmount"
+          },
+          {
+            "sampleUtterances": [
+              "It's {SSN}",
+              "My social security number is {SSN}"
+            ],
+            "slotType": "AMAZON.PhoneNumber",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What's your social security number?"
+                },
+                {
+                  "contentType": "PlainText",
+                  "content": "Can I please have your social security number?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\"}",
+              "maxAttempts": 2
+            },
+            "priority": 1,
+            "name": "SSN"
+          },
+          {
+            "sampleUtterances": [
+              "My zip code is {zipCode}",
+              "My zip is {zipCode}",
+              "It's {zipCode}"
+            ],
+            "slotType": "AMAZON.FOUR_DIGIT_NUMBER",
+            "slotConstraint": "Required",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "Can I please have your five digit zip code?"
+                },
+                {
+                  "contentType": "PlainText",
+                  "content": "What's your five digit zip code?"
+                }
+              ],
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\"}",
+              "maxAttempts": 2
+            },
+            "priority": 2,
+            "name": "zipCode"
+          }
+        ],
+        "confirmationPrompt": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Okay,  I'll look up the tax refund for social security number [SSN_Formatted] at zip code [zipCode_Formatted]. You're expecting a refund of about $[RefundAmount_Formatted]. Does this sound correct?"
+            }
+          ],
+          "maxAttempts": 3
+        }
+      }
+    ],
+    "slotTypes": [
+      {
+        "description": "The amount of our tax refund.",
+        "name": "RefundAmount",
+        "version": "3",
+        "enumerationValues": [
+          {
+            "value": "$2342"
+          },
+          {
+            "value": "1810"
+          },
+          {
+            "value": "$1810"
+          },
+          {
+            "value": "3410 dollars"
+          },
+          {
+            "value": "$2304"
+          },
+          {
+            "value": "2031"
+          }
+        ],
+        "valueSelectionStrategy": "ORIGINAL_VALUE"
+      }
+    ],
+    "voiceId": "Joanna",
+    "childDirected": false,
+    "locale": "en-US",
+    "idleSessionTTLInSeconds": 600,
+    "description": "Bot to check on tax refund status",
+    "clarificationPrompt": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "I didn't understand you, what would you like to do?"
+        }
+      ],
+      "maxAttempts": 2
+    },
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, I am not able to assist at this time"
+        }
+      ]
+    }
+  }
+}
