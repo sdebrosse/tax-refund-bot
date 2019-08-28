@@ -1,4 +1,4 @@
-SSN (N),city (S),filingStatus (S),firstname (S),lastname (S),refundAmount (N),refundStatus (S),state (S),streetAddress (S),zip (N)
+SSN (N),city (S),filingStatus (S),firstname (S),lastname (S),refundAmount (N),refundStatus (S),state (S),streetAddress (S),zipCode (N)
 111223333,San Francisco,HH,John1,Doe1,4331,COMPLETE,CA,111 Fake Ave,94119
 222334444,Los Angeles,S,John2,Doe2,1809.34,COMPLETE,CA,890 Fake St,90210
 333445555,San Diego,HH,John3,Doe3,3310.89,RECEIVED,CA,123 Fake St,92101
