@@ -13,5 +13,6 @@ Follow these steps to deploy the demo:
 
 5. Update the Lambda function so it uses the new role created in step 4.
 6. Create a DynamoDB table called "taxpayers" with SSN (Number) as the partition key. Refer to taxpayers.csv for sample data.
+7. Change line 159 in the Lambda function to the correct region, and line 135 to match your Lex alias.
 
 You can now test the tax refund bot from within the Lex console. You could integrate the bot with a Connect flow, Facebook or SMS (via Twilio).
