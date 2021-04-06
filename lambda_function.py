@@ -179,7 +179,7 @@ def get_tax_refund_status(intent_request):
     
     print(str(result))
     retrievedRefundAmount = result["refundAmount"];
-    retrievedZipCode = result["zip"];
+    retrievedZipCode = result["zipCode"];
     retrievedRefundStatus = result["refundStatus"]
     
     # We're creating the upper and lower bounds for the acceptable refund amount the user can claim (for lookup purposes)
